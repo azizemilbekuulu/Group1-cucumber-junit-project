@@ -49,13 +49,18 @@ public class Roman_AccountCreatedPage implements LoginPages {
     public void closeAddIfPresent() {
         var driver = Driver.getDriver();
         driver.switchTo().frame("aswift_1");
-        driver.switchTo().frame("ad_iframe");
+        List<WebElement> adds = driver.findElements(By.id("dismiss-button"));
+        //sometimes add is in first level iframe
+        if (adds.isEmpty()) {
+            driver.switchTo().frame("ad_iframe");
+            adds = driver.findElements(By.id("dismiss-button"));
+        }
         /*var wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(3));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("dismiss-button")));*/
-        List<WebElement> adds = driver.findElements(By.id("dismiss-button"));
         for (WebElement add : adds) {
             add.click();
         }
+        driver.switchTo().defaultContent();
     }
 
 }

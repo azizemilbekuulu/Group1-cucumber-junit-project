@@ -38,6 +38,9 @@ public class Roman_LoginPage implements LoginPages {
     @FindBy(xpath = "//p[contains(., 'incorrect')]")
     private WebElement incorrectEmailOrPassMessage;
 
+    @FindBy(xpath = "//p[contains(., 'already exist')]")
+    private WebElement alreadyExistMessage;
+
     public WebElement getFirstNameInput() {
         return firstNameInput;
     }
@@ -80,6 +83,8 @@ public class Roman_LoginPage implements LoginPages {
             return loginToYourAccMessage;
         else if (message.equals("Your email or password is incorrect!"))
             return incorrectEmailOrPassMessage;
+        else if (message.equals("Email Address already exist!"))
+            return alreadyExistMessage;
         else
             throw new IllegalArgumentException();
     }

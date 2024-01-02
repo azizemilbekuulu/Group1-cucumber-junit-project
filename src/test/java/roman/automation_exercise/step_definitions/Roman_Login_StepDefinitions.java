@@ -118,12 +118,17 @@ public class Roman_Login_StepDefinitions {
         var actualMessage = pom.getMessage(message).getText();
 
         //in case if it's automatically created account:
-        var username = Roman_ConfigReader.getProperty("tempFirstName");
+        String username;
+        if (message.contains("new_username")) {
+            username = Roman_ConfigReader.getProperty("tempFirstName");
+            message = message.replaceFirst("new_username", username);
+        }
         //in case if using pre-validated credentials:
-        if (username == null)
+        else if (message.contains("valid_username")) {
             username = Roman_ConfigReader.getProperty("AP_validUserName");
+            message = message.replaceFirst("valid_username", username);
+        }
 
-        message = message.replaceFirst("username", username);
         Assert.assertEquals(message, actualMessage);
     }
 
@@ -143,5 +148,12 @@ public class Roman_Login_StepDefinitions {
         }
         else
             throw new IllegalArgumentException();
+    }
+
+    @When("user enters existing name and email address to signup")
+    public void userEntersExistingNameAndEmailAddressToSignup() {
+        var loginPage = new Roman_LoginPage();
+        loginPage.getFirstNameInput().sendKeys(Roman_ConfigReader.getProperty("AP_validUserName"));
+        loginPage.getEmailInputToSignup().sendKeys(Roman_ConfigReader.getProperty("AP_validEmail"));
     }
 }

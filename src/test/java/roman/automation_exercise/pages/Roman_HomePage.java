@@ -35,13 +35,12 @@ public class Roman_HomePage implements LoginPages {
 
     @Override
     public WebElement getButton(String button) {
-        WebElement targetButton = null;
-        if (button.equals("Signup/Login"))
-            targetButton = signupLoginLink;
-        else if (button.equals("Delete account"))
-            targetButton = deleteAccountButton;
-
-        return targetButton;
+        return switch (button) {
+            case "Signup/Login" -> signupLoginLink;
+            case "Delete account" -> deleteAccountButton;
+            case "Logout" -> logoutLink;
+            default -> throw new IllegalArgumentException();
+        };
     }
 
     @Override
