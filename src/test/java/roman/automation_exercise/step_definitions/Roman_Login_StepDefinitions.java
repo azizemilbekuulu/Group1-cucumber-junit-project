@@ -134,6 +134,13 @@ public class Roman_Login_StepDefinitions {
             loginPage.getEmailInputToLogin().sendKeys(Roman_ConfigReader.getProperty("AP_validEmail"));
             loginPage.getPasswordInput().sendKeys(Roman_ConfigReader.getProperty("AP_validPassword"));
         }
+        else if (validOrInvalid.equals("invalid")) {
+            var faker = new Faker();
+            var email = faker.internet().emailAddress();
+            var password = faker.internet().password();
+            loginPage.getEmailInputToLogin().sendKeys(email);
+            loginPage.getPasswordInput().sendKeys(password);
+        }
         else
             throw new IllegalArgumentException();
     }

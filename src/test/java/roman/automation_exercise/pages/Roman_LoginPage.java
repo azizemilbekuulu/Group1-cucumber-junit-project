@@ -35,6 +35,9 @@ public class Roman_LoginPage implements LoginPages {
     @FindBy(xpath = "//button[.='Login']")
     private WebElement loginButton;
 
+    @FindBy(xpath = "//p[contains(., 'incorrect')]")
+    private WebElement incorrectEmailOrPassMessage;
+
     public WebElement getFirstNameInput() {
         return firstNameInput;
     }
@@ -75,6 +78,8 @@ public class Roman_LoginPage implements LoginPages {
             return newUserSignupMessage;
         else if (message.equals("Login to your account"))
             return loginToYourAccMessage;
+        else if (message.equals("Your email or password is incorrect!"))
+            return incorrectEmailOrPassMessage;
         else
             throw new IllegalArgumentException();
     }

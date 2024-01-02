@@ -31,6 +31,17 @@ Feature: Login
     And user on "login_page" click "Login" button
     Then user on "home_page" see login confirmation "Logged in as username" message
 
+  Scenario: Test Case 3: Login User with incorrect email and password
+    Given user is on "home_page"
+    Then user see page is loaded
+    When user on "home_page" click "Signup/Login" button
+    Then user on "login_page" see "Login to your account" message
+    When user enters "invalid" email and password to login
+    And user on "login_page" click "Login" button
+    Then user on "login_page" see "Your email or password is incorrect!" message
+
+
+
 
 
 
