@@ -25,7 +25,6 @@ Feature: Login
     When user on "home_page" click "Delete account" button
     Then user on "delete_account_page" see "ACCOUNT DELETED!" message
 
-
   Scenario: Test Case 2: Login User with correct email and password
     When user on "home_page" click "Signup/Login" button
     Then user on "login_page" see "Login to your account" message

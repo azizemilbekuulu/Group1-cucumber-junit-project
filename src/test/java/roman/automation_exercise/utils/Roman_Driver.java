@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,8 +20,11 @@ public class Roman_Driver {
             String browserType = Roman_ConfigReader.getProperty("browser");
             if (browserType.equalsIgnoreCase("chrome")) {
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--incognito");
+                options.addArguments("start-maximized");
+                options.addArguments("test-type");
+                options.addArguments("disable-notifications");
                 driverPool.set(new ChromeDriver(options));
+                driverPool.get().manage().deleteAllCookies();
             }
             else if (browserType.equalsIgnoreCase("firefox"))
                 driverPool.set(new FirefoxDriver());

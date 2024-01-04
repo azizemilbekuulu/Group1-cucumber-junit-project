@@ -62,5 +62,4 @@ public class Roman_AccountCreatedPage implements LoginPages {
         }
         driver.switchTo().defaultContent();
     }
-
 }
