@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class Roman_SignupPage implements LoginPages {
+public class Roman_SignupPage implements BasePage {
 
     public Roman_SignupPage() {
         PageFactory.initElements(Driver.getDriver(), this);

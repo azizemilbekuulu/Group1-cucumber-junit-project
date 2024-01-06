@@ -1,12 +1,11 @@
 package roman.automation_exercise.pages;
 
 import com.cydeo.utilities.Driver;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Roman_DeleteAccountPage implements LoginPages {
+public class Roman_DeleteAccountPage implements BasePage {
 
     public Roman_DeleteAccountPage() {
         PageFactory.initElements(Driver.getDriver(), this);

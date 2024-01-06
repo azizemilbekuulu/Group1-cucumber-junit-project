@@ -13,8 +13,8 @@ Feature: Login
     And user on "login_page" click "Signup" button
     Then user on "signup_page" see "ENTER ACCOUNT INFORMATION" message
     When user fill details: Title, Name, Email, Password, Date of birth
-    And user on select checkbox "Sign up for our newsletter"
-    And user on select checkbox "Receive special offers from our partners!"
+    And user select checkbox "Sign up for our newsletter"
+    And user select checkbox "Receive special offers from our partners!"
     And user fill details: First name, Last name, Company, both Address lines, Country, State, City, Zipcode, Mobile Number
     And user on "signup_page" click "Create Account" button
     Then user on "account_created_page" see "ACCOUNT CREATED!" message

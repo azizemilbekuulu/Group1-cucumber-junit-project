@@ -4,7 +4,10 @@ import com.cydeo.utilities.Driver;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import roman.automation_exercise.pages.*;
+
+import java.util.List;
 
 public class Roman_AutoExercise_Utils {
 
@@ -103,8 +106,8 @@ public class Roman_AutoExercise_Utils {
         driver.findElement(By.xpath("//button[.='Login']")).click();
     }
 
-    public static LoginPages getPom(String page) {
-        LoginPages pom = null;
+    public static BasePage getPom(String page) {
+        BasePage pom;
         if (page.equals("login_page"))
             pom = new Roman_LoginPage();
         else if (page.equals("signup_page"))
@@ -115,7 +118,28 @@ public class Roman_AutoExercise_Utils {
             pom = new Roman_HomePage();
         else if (page.equals("delete_account_page"))
             pom = new Roman_DeleteAccountPage();
+        else if (page.equals("contact_us_page"))
+            pom = new Roman_ContactUsPage();
+        else
+            throw new IllegalArgumentException();
 
         return pom;
+    }
+
+    public static void closeAddIfPresent() {
+        var driver = Driver.getDriver();
+        driver.switchTo().frame("aswift_1");
+        List<WebElement> adds = driver.findElements(By.id("dismiss-button"));
+        //sometimes add is in first level iframe
+        if (adds.isEmpty()) {
+            driver.switchTo().frame("ad_iframe");
+            adds = driver.findElements(By.id("dismiss-button"));
+        }
+        /*var wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("dismiss-button")));*/
+        for (WebElement add : adds) {
+            add.click();
+        }
+        driver.switchTo().defaultContent();
     }
 }
