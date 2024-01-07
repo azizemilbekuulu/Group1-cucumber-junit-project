@@ -1,5 +1,7 @@
 package roman.automation_exercise.runners;
 
+import com.cydeo.utilities.Driver;
+import io.cucumber.java.AfterAll;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -11,7 +13,7 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt",
         },
         features = "src/test/resources/roman_features",
-        glue = "src/test/java/roman/automation_exercise/step_definitions",
+        glue = "roman/automation_exercise/step_definitions",
         tags = "",
         dryRun = false
 )

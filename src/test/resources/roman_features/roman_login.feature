@@ -1,4 +1,4 @@
-@login
+@Roman @login
 Feature: Login
 
   Background:
@@ -13,14 +13,14 @@ Feature: Login
     And user on "login_page" click "Signup" button
     Then user on "signup_page" see "ENTER ACCOUNT INFORMATION" message
     When user fill details: Title, Name, Email, Password, Date of birth
-    And user on select checkbox "Sign up for our newsletter"
-    And user on select checkbox "Receive special offers from our partners!"
+    And user select checkbox "Sign up for our newsletter"
+    And user select checkbox "Receive special offers from our partners!"
     And user fill details: First name, Last name, Company, both Address lines, Country, State, City, Zipcode, Mobile Number
     And user on "signup_page" click "Create Account" button
     Then user on "account_created_page" see "ACCOUNT CREATED!" message
     When user dismiss alert if present
     And user on "account_created_page" click "Continue" button
-    And user on "account_created_page" click close add button
+    And user click close add button
     Then user on "home_page" see login confirmation "Logged in as new_username" message
     When user on "home_page" click "Delete account" button
     Then user on "delete_account_page" see "ACCOUNT DELETED!" message

@@ -1,6 +1,5 @@
 package roman.automation_exercise.step_definitions;
 
-import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
@@ -9,35 +8,26 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import roman.automation_exercise.pages.*;
 import roman.automation_exercise.utils.Roman_AutoExercise_Utils;
 import roman.automation_exercise.utils.Roman_BrowserUtils;
 import roman.automation_exercise.utils.Roman_ConfigReader;
+import roman.automation_exercise.utils.Roman_Driver;
+
+import java.time.Duration;
 
 public class Roman_Login_StepDefinitions {
     Faker faker = new Faker();
 
-    @Then("user on {string} see {string} message")
-    public void userOnSeeMessage(String page, String message) {
-        LoginPages pom = Roman_AutoExercise_Utils.getPom(page);
-        Assert.assertEquals(message, pom.getMessage(message).getText());
-    }
 
-    @Given("user is on {string}")
-    public void userIsOn(String page) {
-        var pageAddress = Roman_ConfigReader.getProperty(page);
-        Driver.getDriver().get(pageAddress);
-    }
 
     @Then("user see page is loaded")
     public void userSeeLoaded() {
-        Assert.assertTrue(Driver.getDriver().findElement(By.tagName("body")).isDisplayed());
-    }
-
-    @When("user on {string} click {string} button")
-    public void userOnClickButton(String page, String button) {
-        LoginPages pom = Roman_AutoExercise_Utils.getPom(page);
-        pom.getButton(button).click();
+        Assert.assertTrue(Roman_Driver.getDriver().findElement(By.tagName("body")).isDisplayed());
     }
 
     @When("user enters name and email address to signup")
@@ -64,7 +54,7 @@ public class Roman_Login_StepDefinitions {
         signupPage.selectDateOfBirth(13, 12, 1992);
     }
 
-    @And("user on select checkbox {string}")
+    @And("user select checkbox {string}")
     public void userOnSelectCheckbox(String checkbox) {
         var signupPage = new Roman_SignupPage();
         signupPage.getCheckbox(checkbox).click();
@@ -99,37 +89,6 @@ public class Roman_Login_StepDefinitions {
 
         var phoneNumber = faker.phoneNumber().phoneNumber();
         signupPage.getPhoneNumberInput().sendKeys(phoneNumber);
-    }
-
-    @When("user on {string} click close add button")
-    public void userOnClickCloseAddButton(String page) {
-        LoginPages pom = Roman_AutoExercise_Utils.getPom(page);
-        pom.closeAddIfPresent();
-    }
-
-    @When("user dismiss alert if present")
-    public void userOnAlert() {
-        Roman_BrowserUtils.dismissAlertIfPresent();
-    }
-
-    @Then("user on {string} see login confirmation {string} message")
-    public void userOnSeeLoginConfirmationMessage(String page, String message) {
-        LoginPages pom = Roman_AutoExercise_Utils.getPom(page);
-        var actualMessage = pom.getMessage(message).getText();
-
-        //in case if it's automatically created account:
-        String username;
-        if (message.contains("new_username")) {
-            username = Roman_ConfigReader.getProperty("tempFirstName");
-            message = message.replaceFirst("new_username", username);
-        }
-        //in case if using pre-validated credentials:
-        else if (message.contains("valid_username")) {
-            username = Roman_ConfigReader.getProperty("AP_validUserName");
-            message = message.replaceFirst("valid_username", username);
-        }
-
-        Assert.assertEquals(message, actualMessage);
     }
 
     @When("user enters {string} email and password to login")

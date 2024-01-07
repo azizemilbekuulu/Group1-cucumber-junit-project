@@ -2,22 +2,18 @@ package roman.automation_exercise.pages;
 
 import com.cydeo.utilities.Driver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import roman.automation_exercise.utils.Roman_Driver;
 
-public class Roman_DeleteAccountPage implements BasePage {
+public class Roman_TestCasesPage implements BasePage{
 
-    public Roman_DeleteAccountPage() {
+    public Roman_TestCasesPage() {
         PageFactory.initElements(Roman_Driver.getDriver(), this);
     }
 
-    @FindBy(xpath = "//h2/b")
-    private WebElement accountDeletedMessage;
-
     @Override
     public WebElement getMessage(String message) {
-        return accountDeletedMessage;
+        return null;
     }
 
     @Override
@@ -26,5 +22,7 @@ public class Roman_DeleteAccountPage implements BasePage {
     }
 
     @Override
-    public void closeAddIfPresent() {}
+    public void closeAddIfPresent() {
+
+    }
 }

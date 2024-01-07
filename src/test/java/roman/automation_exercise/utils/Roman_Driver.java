@@ -7,6 +7,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -19,12 +20,11 @@ public class Roman_Driver {
         if (driverPool.get() == null) {
             String browserType = Roman_ConfigReader.getProperty("browser");
             if (browserType.equalsIgnoreCase("chrome")) {
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("start-maximized");
-                options.addArguments("test-type");
-                options.addArguments("disable-notifications");
+                var options = new ChromeOptions();
+                //to get rid of ads by using uBlock
+                var extensionPath = "C:\\Users\\Roman\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\cjpalhdlnbpafiamejdnhcphjbkeiagm\\1.54.0_0";
+                options.addArguments("load-extension=" + extensionPath);
                 driverPool.set(new ChromeDriver(options));
-                driverPool.get().manage().deleteAllCookies();
             }
             else if (browserType.equalsIgnoreCase("firefox"))
                 driverPool.set(new FirefoxDriver());
