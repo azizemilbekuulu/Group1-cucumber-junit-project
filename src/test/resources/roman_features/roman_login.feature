@@ -1,4 +1,4 @@
-@login
+@Roman @login
 Feature: Login
 
   Background:
@@ -20,7 +20,7 @@ Feature: Login
     Then user on "account_created_page" see "ACCOUNT CREATED!" message
     When user dismiss alert if present
     And user on "account_created_page" click "Continue" button
-    And user on "account_created_page" click close add button
+    And user click close add button
     Then user on "home_page" see login confirmation "Logged in as new_username" message
     When user on "home_page" click "Delete account" button
     Then user on "delete_account_page" see "ACCOUNT DELETED!" message

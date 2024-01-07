@@ -5,11 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import roman.automation_exercise.utils.Roman_Driver;
 
 public class Roman_SignupPage implements BasePage {
 
     public Roman_SignupPage() {
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Roman_Driver.getDriver(), this);
     }
 
     @FindBy(xpath = "//h2/b")

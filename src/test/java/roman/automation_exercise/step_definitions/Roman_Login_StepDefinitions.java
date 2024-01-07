@@ -12,6 +12,7 @@ import roman.automation_exercise.pages.*;
 import roman.automation_exercise.utils.Roman_AutoExercise_Utils;
 import roman.automation_exercise.utils.Roman_BrowserUtils;
 import roman.automation_exercise.utils.Roman_ConfigReader;
+import roman.automation_exercise.utils.Roman_Driver;
 
 public class Roman_Login_StepDefinitions {
     Faker faker = new Faker();
@@ -20,13 +21,7 @@ public class Roman_Login_StepDefinitions {
 
     @Then("user see page is loaded")
     public void userSeeLoaded() {
-        Assert.assertTrue(Driver.getDriver().findElement(By.tagName("body")).isDisplayed());
-    }
-
-    @When("user on {string} click {string} button")
-    public void userOnClickButton(String page, String button) {
-        BasePage pom = Roman_AutoExercise_Utils.getPom(page);
-        pom.getButton(button).click();
+        Assert.assertTrue(Roman_Driver.getDriver().findElement(By.tagName("body")).isDisplayed());
     }
 
     @When("user enters name and email address to signup")
@@ -88,26 +83,6 @@ public class Roman_Login_StepDefinitions {
 
         var phoneNumber = faker.phoneNumber().phoneNumber();
         signupPage.getPhoneNumberInput().sendKeys(phoneNumber);
-    }
-
-    @Then("user on {string} see login confirmation {string} message")
-    public void userOnSeeLoginConfirmationMessage(String page, String message) {
-        BasePage pom = Roman_AutoExercise_Utils.getPom(page);
-        var actualMessage = pom.getMessage(message).getText();
-
-        //in case if it's automatically created account:
-        String username;
-        if (message.contains("new_username")) {
-            username = Roman_ConfigReader.getProperty("tempFirstName");
-            message = message.replaceFirst("new_username", username);
-        }
-        //in case if using pre-validated credentials:
-        else if (message.contains("valid_username")) {
-            username = Roman_ConfigReader.getProperty("AP_validUserName");
-            message = message.replaceFirst("valid_username", username);
-        }
-
-        Assert.assertEquals(message, actualMessage);
     }
 
     @When("user enters {string} email and password to login")

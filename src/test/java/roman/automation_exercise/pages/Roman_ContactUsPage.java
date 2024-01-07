@@ -5,11 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import roman.automation_exercise.utils.Roman_AutoExercise_Utils;
+import roman.automation_exercise.utils.Roman_Driver;
 
 public class Roman_ContactUsPage implements BasePage {
 
     public Roman_ContactUsPage() {
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Roman_Driver.getDriver(), this);
     }
 
     @FindBy(xpath = "//div[@class='contact-form']/h2")

@@ -4,15 +4,17 @@ import com.cydeo.utilities.Driver;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebElement;
 import roman.automation_exercise.pages.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Roman_AutoExercise_Utils {
 
     public static void createNewAccountAndLogOut() {
-        var driver = Driver.getDriver();
+        var driver = Roman_Driver.getDriver();
         var homePage = new Roman_HomePage();
         var loginPage = new Roman_LoginPage();
         var signupPage = new Roman_SignupPage();
@@ -77,7 +79,7 @@ public class Roman_AutoExercise_Utils {
 
     //to login with valid credentials
     public static void login() {
-        var driver = Driver.getDriver();
+        var driver = Roman_Driver.getDriver();
         driver.get("https://automationexercise.com");
         Assert.assertTrue(driver.findElement(By.tagName("body")).isDisplayed());
 
@@ -95,7 +97,7 @@ public class Roman_AutoExercise_Utils {
 
     //to login with provided email and password
     public static void login(String email, String password) {
-        var driver = Driver.getDriver();
+        var driver = Roman_Driver.getDriver();
         driver.get("https://automationexercise.com");
         Assert.assertTrue(driver.findElement(By.tagName("body")).isDisplayed());
 
@@ -127,14 +129,28 @@ public class Roman_AutoExercise_Utils {
     }
 
     public static void closeAddIfPresent() {
-        var driver = Driver.getDriver();
-        driver.switchTo().frame("aswift_1");
-        List<WebElement> adds = driver.findElements(By.id("dismiss-button"));
-        //sometimes add is in first level iframe
-        if (adds.isEmpty()) {
-            driver.switchTo().frame("ad_iframe");
+        var driver = Roman_Driver.getDriver();
+        List<WebElement> frames;
+        List<WebElement> adds = new ArrayList<>();
+
+        //on some pages parent frame may be different, but child frame is always the same
+        try {
+            frames = driver.findElements(By.id("aswift_1"));
+            if (frames.isEmpty())
+                frames = driver.findElements(By.id("aswift_5"));
+            if (frames.isEmpty())
+                frames = driver.findElements(By.id("aswift_2"));
+
+            driver.switchTo().frame(frames.get(0));
+
             adds = driver.findElements(By.id("dismiss-button"));
-        }
+            //in case if add is not in parent iframe
+            if (adds.isEmpty()) {
+                driver.switchTo().frame("ad_iframe");
+                adds = driver.findElements(By.id("dismiss-button"));
+            }
+        } catch (NoSuchFrameException e) {}
+
         /*var wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(3));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("dismiss-button")));*/
         for (WebElement add : adds) {

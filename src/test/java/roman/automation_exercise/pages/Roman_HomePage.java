@@ -4,11 +4,14 @@ import com.cydeo.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import roman.automation_exercise.utils.Roman_Driver;
+
+import java.util.List;
 
 public class Roman_HomePage implements BasePage {
 
     public Roman_HomePage() {
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Roman_Driver.getDriver(), this);
     }
 
     @FindBy(xpath = "//a[@href='/login']")
@@ -26,6 +29,9 @@ public class Roman_HomePage implements BasePage {
     @FindBy(xpath = "//a[@href='/contact_us']")
     private WebElement contactUsButton;
 
+    @FindBy(xpath = "//a[@href='/test_cases']")
+    private WebElement testCasesButton;
+
     public WebElement getLogoutLink() {
         return logoutLink;
     }
@@ -42,6 +48,7 @@ public class Roman_HomePage implements BasePage {
             case "Delete account" -> deleteAccountButton;
             case "Logout" -> logoutLink;
             case "Contact us" -> contactUsButton;
+            case "Test cases" -> testCasesButton;
             default -> throw new IllegalArgumentException();
         };
     }

@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt",
         },
         features = "src/test/resources/roman_features",
-        glue = "src/test/java/roman/automation_exercise/step_definitions",
+        glue = "roman/automation_exercise/step_definitions",
         tags = "",
         dryRun = false
 )

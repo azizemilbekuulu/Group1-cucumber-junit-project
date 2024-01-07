@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import roman.automation_exercise.pages.Roman_ContactUsPage;
+import roman.automation_exercise.utils.Roman_Driver;
 
 public class Roman_ContactUs_StepDefinitions {
     Roman_ContactUsPage contactUsPage = new Roman_ContactUsPage();
@@ -30,11 +31,11 @@ public class Roman_ContactUs_StepDefinitions {
 
     @And("user on contact_us_page page accept alert")
     public void userOnContact_us_pagePageAcceptAlert() {
-        Driver.getDriver().switchTo().alert().accept();
+        Roman_Driver.getDriver().switchTo().alert().accept();
     }
 
     @Then("user landed to the home_page")
     public void userLandedToTheHome_page() {
-        Assert.assertEquals("Automation Exercise", Driver.getDriver().getTitle());
+        Assert.assertEquals("Automation Exercise", Roman_Driver.getDriver().getTitle());
     }
 }

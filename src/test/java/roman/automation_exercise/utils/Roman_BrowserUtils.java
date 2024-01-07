@@ -15,7 +15,7 @@ public class Roman_BrowserUtils {
 
     public static void dismissAlertIfPresent() {
         try {
-            Driver.getDriver().switchTo().alert().dismiss();
+            Roman_Driver.getDriver().switchTo().alert().dismiss();
         } catch (NoAlertPresentException e) {}
     }
 }

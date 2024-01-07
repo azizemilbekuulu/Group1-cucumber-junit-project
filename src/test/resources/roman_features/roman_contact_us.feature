@@ -1,3 +1,4 @@
+@Roman
 Feature: Contact Us
   Background: User launch home page
     Given user is on "home_page"
@@ -12,6 +13,6 @@ Feature: Contact Us
     And user on contact_us_page page accept alert
     Then user on "contact_us_page" see "Success! Your details have been submitted successfully." message
     When user on "contact_us_page" click "Home" button
-    And user on "contact_us_page" click close add button
+    And user click close add button
     Then user landed to the home_page
     
