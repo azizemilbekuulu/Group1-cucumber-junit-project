@@ -22,7 +22,8 @@ public class Roman_Driver {
             if (browserType.equalsIgnoreCase("chrome")) {
                 var options = new ChromeOptions();
                 //to get rid of ads by using uBlock
-                options.addArguments("user-data-dir=" + System.getProperty("user.dir") + "\\Users\\Roman\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1");
+                var extensionPath = "C:\\Users\\Roman\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\cjpalhdlnbpafiamejdnhcphjbkeiagm\\1.54.0_0";
+                options.addArguments("load-extension=" + extensionPath);
                 driverPool.set(new ChromeDriver(options));
             }
             else if (browserType.equalsIgnoreCase("firefox"))

@@ -8,3 +8,4 @@ Feature: Test cases page
   Scenario: Test Case 7: Verify Test Cases Page
     When user on "home_page" click "Test cases" button
     Then user landed to the test_cases_page
+
