@@ -1,27 +1,22 @@
 package roman.automation_exercise.step_definitions;
 
-import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import roman.automation_exercise.pages.BasePage;
+import roman.automation_exercise.pages.Roman_BasePage;
+import roman.automation_exercise.pages.Roman_ProductsPage;
 import roman.automation_exercise.utils.Roman_AutoExercise_Utils;
 import roman.automation_exercise.utils.Roman_BrowserUtils;
 import roman.automation_exercise.utils.Roman_ConfigReader;
 import roman.automation_exercise.utils.Roman_Driver;
 
-import java.time.Duration;
-
 public class Roman_Generic_StepDefinitions {
 
     @Then("user on {string} see {string} message")
     public void userOnSeeMessage(String page, String message) {
-        BasePage pom = Roman_AutoExercise_Utils.getPom(page);
+        Roman_BasePage pom = Roman_AutoExercise_Utils.getPom(page);
         Assert.assertEquals(message, pom.getMessage(message).getText());
     }
 
@@ -41,15 +36,15 @@ public class Roman_Generic_StepDefinitions {
         /*Roman_AutoExercise_Utils.closeAddIfPresent();*/
     }
 
-    @When("user on {string} click {string} button")
+    @When("user on {string} clicks {string} button")
     public void userOnClickButton(String page, String button) {
-        BasePage pom = Roman_AutoExercise_Utils.getPom(page);
+        Roman_BasePage pom = Roman_AutoExercise_Utils.getPom(page);
         pom.getButton(button).click();
     }
 
     @Then("user on {string} see login confirmation {string} message")
     public void userOnSeeLoginConfirmationMessage(String page, String message) {
-        BasePage pom = Roman_AutoExercise_Utils.getPom(page);
+        Roman_BasePage pom = Roman_AutoExercise_Utils.getPom(page);
         var actualMessage = pom.getMessage(message).getText();
 
         //in case if it's automatically created account:
@@ -70,5 +65,11 @@ public class Roman_Generic_StepDefinitions {
     @When("user dismiss alert if present")
     public void userOnAlert() {
         Roman_BrowserUtils.dismissAlertIfPresent();
+    }
+
+    @Then("user sees {string} page is loaded")
+    public void userSeesPageIsLoaded(String page) {
+        Roman_BasePage pom = Roman_AutoExercise_Utils.getPom(page);
+        pom.verifyPageIsLoaded();
     }
 }

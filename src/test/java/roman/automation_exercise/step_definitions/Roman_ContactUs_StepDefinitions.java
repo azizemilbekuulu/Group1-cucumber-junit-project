@@ -1,16 +1,15 @@
 package roman.automation_exercise.step_definitions;
 
-import com.cydeo.utilities.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import roman.automation_exercise.pages.Roman_ContactUsPage;
+import roman.automation_exercise.pages.Roman_ContactUsPageRoman;
 import roman.automation_exercise.utils.Roman_Driver;
 
 public class Roman_ContactUs_StepDefinitions {
-    Roman_ContactUsPage contactUsPage = new Roman_ContactUsPage();
+    Roman_ContactUsPageRoman contactUsPage = new Roman_ContactUsPageRoman();
 
     @When("user on contact_us_page enters name, email, subject and message")
     public void userOnContactUsPageEntersNameEmailSubjectAndMessage() {

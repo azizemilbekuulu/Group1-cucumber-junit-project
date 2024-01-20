@@ -1,24 +1,14 @@
 package roman.automation_exercise.step_definitions;
 
-import com.cydeo.utilities.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import roman.automation_exercise.pages.*;
-import roman.automation_exercise.utils.Roman_AutoExercise_Utils;
-import roman.automation_exercise.utils.Roman_BrowserUtils;
 import roman.automation_exercise.utils.Roman_ConfigReader;
 import roman.automation_exercise.utils.Roman_Driver;
-
-import java.time.Duration;
 
 public class Roman_Login_StepDefinitions {
     Faker faker = new Faker();
@@ -32,7 +22,7 @@ public class Roman_Login_StepDefinitions {
 
     @When("user enters name and email address to signup")
     public void userEntersNameAndEmailAddress() {
-        var loginPage = new Roman_LoginPage();
+        var loginPage = new Roman_LoginPageRoman();
 
         var firstName = faker.name().firstName();
         //storing temp property to re-use it further in registration
@@ -45,7 +35,7 @@ public class Roman_Login_StepDefinitions {
 
     @When("user fill details: Title, Name, Email, Password, Date of birth")
     public void userFillDetailsTitleNameEmailPasswordDateOfBirth() {
-        var signupPage = new Roman_SignupPage();
+        var signupPage = new Roman_SignupPageRoman();
         signupPage.getGenderMale().click();
 
         var password = faker.internet().password();
@@ -56,13 +46,13 @@ public class Roman_Login_StepDefinitions {
 
     @And("user select checkbox {string}")
     public void userOnSelectCheckbox(String checkbox) {
-        var signupPage = new Roman_SignupPage();
+        var signupPage = new Roman_SignupPageRoman();
         signupPage.getCheckbox(checkbox).click();
     }
 
     @And("user fill details: First name, Last name, Company, both Address lines, Country, State, City, Zipcode, Mobile Number")
     public void userFillDetailsFirstNameLastNameCompanyBothAddressLinesCountryStateCityZipcodeMobileNumber() {
-        var signupPage = new Roman_SignupPage();
+        var signupPage = new Roman_SignupPageRoman();
         signupPage.getFirstNameInput().sendKeys(Roman_ConfigReader.getProperty("tempFirstName"));
 
         var lastName = faker.name().lastName();
@@ -93,7 +83,7 @@ public class Roman_Login_StepDefinitions {
 
     @When("user enters {string} email and password to login")
     public void userEntersEmailAndPasswordToLogin(String validOrInvalid) {
-        var loginPage = new Roman_LoginPage();
+        var loginPage = new Roman_LoginPageRoman();
         if (validOrInvalid.equals("valid")) {
             loginPage.getEmailInputToLogin().sendKeys(Roman_ConfigReader.getProperty("AP_validEmail"));
             loginPage.getPasswordInput().sendKeys(Roman_ConfigReader.getProperty("AP_validPassword"));
@@ -111,7 +101,7 @@ public class Roman_Login_StepDefinitions {
 
     @When("user enters existing name and email address to signup")
     public void userEntersExistingNameAndEmailAddressToSignup() {
-        var loginPage = new Roman_LoginPage();
+        var loginPage = new Roman_LoginPageRoman();
         loginPage.getFirstNameInput().sendKeys(Roman_ConfigReader.getProperty("AP_validUserName"));
         loginPage.getEmailInputToSignup().sendKeys(Roman_ConfigReader.getProperty("AP_validEmail"));
     }

@@ -1,16 +1,13 @@
 package roman.automation_exercise.pages;
 
-import com.cydeo.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import roman.automation_exercise.utils.Roman_Driver;
 
-import java.util.List;
+public class Roman_HomePageRoman implements Roman_BasePage {
 
-public class Roman_HomePage implements BasePage {
-
-    public Roman_HomePage() {
+    public Roman_HomePageRoman() {
         PageFactory.initElements(Roman_Driver.getDriver(), this);
     }
 
@@ -32,6 +29,9 @@ public class Roman_HomePage implements BasePage {
     @FindBy(xpath = "//a[@href='/test_cases']")
     private WebElement testCasesButton;
 
+    @FindBy(xpath = "//a[@href='/products']")
+    private WebElement productsButton;
+
     public WebElement getLogoutLink() {
         return logoutLink;
     }
@@ -49,10 +49,18 @@ public class Roman_HomePage implements BasePage {
             case "Logout" -> logoutLink;
             case "Contact us" -> contactUsButton;
             case "Test cases" -> testCasesButton;
+            case "products" -> productsButton;
             default -> throw new IllegalArgumentException();
         };
     }
 
     @Override
-    public void closeAddIfPresent() {}
+    public void verifyPageIsLoaded() {
+        throw new IllegalArgumentException();
+    }
+
+    @Override
+    public void closeAddIfPresent() {
+        throw new IllegalStateException();
+    }
 }

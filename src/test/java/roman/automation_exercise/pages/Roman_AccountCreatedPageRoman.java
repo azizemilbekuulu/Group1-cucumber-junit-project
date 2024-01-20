@@ -1,18 +1,14 @@
 package roman.automation_exercise.pages;
 
-import com.cydeo.utilities.Driver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import roman.automation_exercise.utils.Roman_AutoExercise_Utils;
 import roman.automation_exercise.utils.Roman_Driver;
 
-import java.util.List;
+public class Roman_AccountCreatedPageRoman implements Roman_BasePage {
 
-public class Roman_AccountCreatedPage implements BasePage {
-
-    public Roman_AccountCreatedPage() {
+    public Roman_AccountCreatedPageRoman() {
         PageFactory.initElements(Roman_Driver.getDriver(), this);
     }
 
@@ -44,7 +40,12 @@ public class Roman_AccountCreatedPage implements BasePage {
     }
 
     @Override
+    public void verifyPageIsLoaded() {
+        throw new IllegalStateException();
+    }
+
+    @Override
     public void closeAddIfPresent() {
-        Roman_AutoExercise_Utils.closeAddIfPresent();
+        throw new IllegalStateException();
     }
 }

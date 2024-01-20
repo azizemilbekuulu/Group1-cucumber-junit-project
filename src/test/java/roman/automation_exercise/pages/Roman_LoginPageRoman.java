@@ -1,14 +1,13 @@
 package roman.automation_exercise.pages;
 
-import com.cydeo.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import roman.automation_exercise.utils.Roman_Driver;
 
-public class Roman_LoginPage implements BasePage {
+public class Roman_LoginPageRoman implements Roman_BasePage {
 
-    public Roman_LoginPage() {
+    public Roman_LoginPageRoman() {
         PageFactory.initElements(Roman_Driver.getDriver(), this);
     }
 
@@ -77,6 +76,11 @@ public class Roman_LoginPage implements BasePage {
     }
 
     @Override
+    public void verifyPageIsLoaded() {
+        throw new IllegalStateException();
+    }
+
+    @Override
     public WebElement getMessage(String message) {
         if (message.equals("New User Signup!"))
             return newUserSignupMessage;
@@ -92,6 +96,7 @@ public class Roman_LoginPage implements BasePage {
 
     @Override
     public void closeAddIfPresent() {
+        throw new IllegalStateException();
     }
 
 

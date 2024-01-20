@@ -1,15 +1,14 @@
 package roman.automation_exercise.pages;
 
-import com.cydeo.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import roman.automation_exercise.utils.Roman_AutoExercise_Utils;
 import roman.automation_exercise.utils.Roman_Driver;
 
-public class Roman_ContactUsPage implements BasePage {
+public class Roman_ContactUsPageRoman implements Roman_BasePage {
 
-    public Roman_ContactUsPage() {
+    public Roman_ContactUsPageRoman() {
         PageFactory.initElements(Roman_Driver.getDriver(), this);
     }
 
@@ -58,6 +57,11 @@ public class Roman_ContactUsPage implements BasePage {
             return genericHomeButton;
         else
             throw new IllegalArgumentException();
+    }
+
+    @Override
+    public void verifyPageIsLoaded() {
+        throw new IllegalStateException();
     }
 
     @Override

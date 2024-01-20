@@ -1,6 +1,5 @@
 package roman.automation_exercise.utils;
 
-import com.cydeo.utilities.Driver;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -15,10 +14,10 @@ public class Roman_AutoExercise_Utils {
 
     public static void createNewAccountAndLogOut() {
         var driver = Roman_Driver.getDriver();
-        var homePage = new Roman_HomePage();
-        var loginPage = new Roman_LoginPage();
-        var signupPage = new Roman_SignupPage();
-        var accountCreatedPage = new Roman_AccountCreatedPage();
+        var homePage = new Roman_HomePageRoman();
+        var loginPage = new Roman_LoginPageRoman();
+        var signupPage = new Roman_SignupPageRoman();
+        var accountCreatedPage = new Roman_AccountCreatedPageRoman();
 
         driver.get("https://automationexercise.com");
 
@@ -108,20 +107,24 @@ public class Roman_AutoExercise_Utils {
         driver.findElement(By.xpath("//button[.='Login']")).click();
     }
 
-    public static BasePage getPom(String page) {
-        BasePage pom;
+    public static Roman_BasePage getPom(String page) {
+        Roman_BasePage pom;
         if (page.equals("login_page"))
-            pom = new Roman_LoginPage();
+            pom = new Roman_LoginPageRoman();
         else if (page.equals("signup_page"))
-            pom = new Roman_SignupPage();
+            pom = new Roman_SignupPageRoman();
         else if (page.equals("account_created_page"))
-            pom = new Roman_AccountCreatedPage();
+            pom = new Roman_AccountCreatedPageRoman();
         else if (page.equals("home_page"))
-            pom = new Roman_HomePage();
+            pom = new Roman_HomePageRoman();
         else if (page.equals("delete_account_page"))
-            pom = new Roman_DeleteAccountPage();
+            pom = new Roman_DeleteAccountPageRoman();
         else if (page.equals("contact_us_page"))
-            pom = new Roman_ContactUsPage();
+            pom = new Roman_ContactUsPageRoman();
+        else if (page.equals("products_page"))
+            pom = new Roman_ProductsPage();
+        else if (page.equals("product_details"))
+            pom = new Roman_ProductDetailsPage();
         else
             throw new IllegalArgumentException();
 
