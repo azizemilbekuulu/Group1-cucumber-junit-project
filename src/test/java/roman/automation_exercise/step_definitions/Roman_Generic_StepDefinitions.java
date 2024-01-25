@@ -1,5 +1,6 @@
 package roman.automation_exercise.step_definitions;
 
+import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -71,5 +72,11 @@ public class Roman_Generic_StepDefinitions {
     public void userSeesPageIsLoaded(String page) {
         Roman_BasePage pom = Roman_AutoExercise_Utils.getPom(page);
         pom.verifyPageIsLoaded();
+    }
+
+    @When("user scrolls down to the footer of the page")
+    public void userScrollsDownToTheFooterOfThePage() {
+        JavascriptExecutor js = (JavascriptExecutor) Roman_Driver.getDriver();
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
     }
 }

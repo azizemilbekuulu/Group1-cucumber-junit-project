@@ -32,13 +32,32 @@ public class Roman_HomePageRoman implements Roman_BasePage {
     @FindBy(xpath = "//a[@href='/products']")
     private WebElement productsButton;
 
+    @FindBy(xpath = "//footer[@id='footer']//h2")
+    private WebElement subscriptionMessage;
+
+    @FindBy(id = "susbscribe_email")
+    private WebElement subscribeEmailInput;
+
+    @FindBy(id = "subscribe")
+    private WebElement subscribeButton;
+
+    @FindBy(id = "success-subscribe")
+    private WebElement successfulSubscriptionMessage;
+
     public WebElement getLogoutLink() {
         return logoutLink;
     }
 
     @Override
     public WebElement getMessage(String message) {
-        return loggedAsUserMessage;
+        if (message.equals("Logged in as valid_username"))
+            return loggedAsUserMessage;
+        else if (message.equals("SUBSCRIPTION"))
+            return subscriptionMessage;
+        else if (message.contains("subscribed"))
+            return successfulSubscriptionMessage;
+        else
+            throw new IllegalArgumentException();
     }
 
     @Override
@@ -50,6 +69,7 @@ public class Roman_HomePageRoman implements Roman_BasePage {
             case "Contact us" -> contactUsButton;
             case "Test cases" -> testCasesButton;
             case "products" -> productsButton;
+            case "subscribe" -> subscribeButton;
             default -> throw new IllegalArgumentException();
         };
     }
@@ -62,5 +82,9 @@ public class Roman_HomePageRoman implements Roman_BasePage {
     @Override
     public void closeAddIfPresent() {
         throw new IllegalStateException();
+    }
+
+    public WebElement getSubscribeEmailInput() {
+        return subscribeEmailInput;
     }
 }
