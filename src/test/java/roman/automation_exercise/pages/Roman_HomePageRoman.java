@@ -44,6 +44,9 @@ public class Roman_HomePageRoman implements Roman_BasePage {
     @FindBy(id = "success-subscribe")
     private WebElement successfulSubscriptionMessage;
 
+    @FindBy(xpath = "//header//a[@href='/view_cart']")
+    private WebElement cartButton;
+
     public WebElement getLogoutLink() {
         return logoutLink;
     }
@@ -70,6 +73,7 @@ public class Roman_HomePageRoman implements Roman_BasePage {
             case "Test cases" -> testCasesButton;
             case "products" -> productsButton;
             case "subscribe" -> subscribeButton;
+            case "cart" -> cartButton;
             default -> throw new IllegalArgumentException();
         };
     }
