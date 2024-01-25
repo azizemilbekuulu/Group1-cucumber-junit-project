@@ -12,3 +12,11 @@ Feature: All products page, list of products, product details
     Then user sees "product_details" page is loaded
     And user see all product details: product name, category, price, availability, condition, brand
 
+  Scenario: Test Case 9: Search Product
+    When user on "home_page" clicks "products" button
+    Then user sees "products_page" page is loaded
+    When user enters "dress" in search input
+    And user on "products_page" clicks "search" button
+    Then user on "products_page" see "SEARCHED PRODUCTS" message
+    And user see all products related to search are visible
+
